@@ -8,6 +8,7 @@ import (
 	getOne "github.com/k5sha/golang-todo-example/internal/http-server/handlers/todos/get-one"
 	"github.com/k5sha/golang-todo-example/internal/http-server/handlers/todos/remove"
 	"github.com/k5sha/golang-todo-example/internal/http-server/handlers/todos/update"
+	"github.com/k5sha/golang-todo-example/internal/http-server/middleware/cors"
 	"github.com/k5sha/golang-todo-example/internal/http-server/middleware/logger"
 	"github.com/k5sha/golang-todo-example/internal/storage/models/todoModels"
 	"github.com/k5sha/golang-todo-example/internal/storage/postgresql"
@@ -22,6 +23,7 @@ func SetupRoutes(log *slog.Logger, storage *postgresql.Storage) *chi.Mux {
 	router.Use(middleware.Recoverer)
 	router.Use(middleware.URLFormat)
 	router.Use(logger.New(log))
+	router.Use(cors.New)
 
 	// Init Storage
 	todoStorage := &todoModels.TodoStorage{Storage: storage}
@@ -32,7 +34,7 @@ func SetupRoutes(log *slog.Logger, storage *postgresql.Storage) *chi.Mux {
 		r.Get("/{id}", getOne.New(log, todoStorage))
 
 		r.Post("/", create.New(log, todoStorage))
-		r.Delete("/", remove.New(log, todoStorage))
+		r.Delete("/{id}/delete", remove.New(log, todoStorage))
 		r.Patch("/{id}/status", update.New(log, todoStorage))
 
 	})

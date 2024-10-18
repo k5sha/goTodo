@@ -1,0 +1,113 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+li {
+  text-align: left;
+  padding: 0.3em;
+}
+
+button {
+  margin: 0.5em;
+  text-align: center;
+}
+
+@keyframes shrinkFade {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px); /* Start slightly below */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* End at original position */
+  }
+}
+
+
+.todo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Создаем колонки */
+  gap: 1.5em; /* Отступы между карточками */
+  margin: 1em; /* Отступ вокруг сетки */
+  transition: all 0.3s ease;
+}
+
+.todo-card {
+  border: 1px solid #ddd; /* Легкая граница */
+  border-radius: 8px; /* Закругленные углы */
+  padding: 1em; /* Отступ внутри карточки */
+  background-color: #f9f9f9; /* Светлый фон карточки */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Легкая тень */
+  color: #1a1a1a;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  animation: slideIn 0.3s forwards;
+}
+
+
+.removing {
+  animation: shrinkFade 0.3s forwards;
+  opacity: 0; /* Убираем элемент из видимости */
+  transform: scale(0.5); /* Уменьшаем элемент */
+}
+
+.todo-card:hover {
+  transform: scale(1.05); /* Scale up on hover */
+}
+
+
+.todo-title {
+  font-size: 1.5em; /* Размер шрифта заголовка */
+  margin: 0.5em 0; /* Отступы вокруг заголовка */
+}
+
+.todo-status {
+  color: #666; /* Цвет для статуса задачи */
+  font-style: italic; /* Курсив для выделения */
+}
+
+.todo-actions {
+  display: flex; /* Выровнять кнопки в ряд */
+  justify-content: space-between; /* Распределение кнопок по краям */
+  margin-top: 1em; /* Отступ сверху для кнопок */
+}
+
+
+
+.delete-btn {
+  background-color: #e57373; /* Более мягкий красный цвет */
+  color: white; /* Цвет текста */
+  border: 1px solid transparent; /* Прозрачная обводка по умолчанию */
+  transition: background-color 0.3s, border-color 0.25s; /* Плавный переход */
+}
+
+.delete-btn:hover {
+  background-color: #ff5252; /* Более яркий красный при наведении */
+  border-color: #d32f2f; /* Обводка при наведении */
+}
+
+.complete-btn {
+  background-color: #81c784; /* Более мягкий зеленый цвет */
+  color: white; /* Цвет текста */
+  border: 1px solid transparent; /* Прозрачная обводка по умолчанию */
+  transition: background-color 0.3s, border-color 0.25s; /* Плавный переход */
+}
+
+.complete-btn:hover {
+  background-color: #66bb6a; /* Более яркий зеленый при наведении */
+  border-color: #388e3c; /* Обводка при наведении */
+}
+

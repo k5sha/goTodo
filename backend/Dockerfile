@@ -13,7 +13,7 @@ COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build -o / ./cmd/go-todo
 
 
-ENV CONFIG_PATH=./config/local.yaml
+ENV CONFIG_PATH=./config/development.yaml
 
 EXPOSE 8080
 

@@ -1,6 +1,7 @@
 package remove
 
 import (
+	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/render"
 	"github.com/k5sha/golang-todo-example/internal/lib/logger/sl"
@@ -30,27 +31,16 @@ func New(log *slog.Logger, todoRemover TodoRemover) http.HandlerFunc {
 			slog.String("request_id", middleware.GetReqID(r.Context())),
 		)
 
-		var req Request
+		id := chi.URLParam(r, "id")
+		if id == "" {
+			log.Info("id is empty")
 
-		err := render.DecodeJSON(r.Body, &req)
-		if err != nil {
-			log.Error("failed to decode request body", sl.Err(err))
-
-			ResponseError(w, r, "failed to decode request")
+			ResponseError(w, r, "invalid request")
 
 			return
 		}
 
-		log.Info("request body decoded", slog.Any("request", req))
-		if req.Id == "" {
-			ResponseError(w, r, "field Id is a required field")
-
-			return
-		}
-
-		id := req.Id
-
-		err = todoRemover.RemoveTodo(id)
+		err := todoRemover.RemoveTodo(id)
 		if err != nil {
 			log.Error("failed to remove todo", sl.Err(err))
 			ResponseError(w, r, "failed to remove todo")

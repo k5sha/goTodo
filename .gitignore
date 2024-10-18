@@ -1,10 +1,47 @@
-# Default ignored files
+# Go build artifacts
+/bin/
+# Go module files
+*.mod
+*.sum
+# Go workspace
+/.idea/
+*.exe
+*.test
+*.out
+
+# Vite and React build files
+/dist/
+*.local
+.vite/
+.cache/
+node_modules/
+package-lock.json
+yarn-error.log
+yarn-debug.log
+*.tgz
+
+# IDE files
+/.idea/
+/.vscode/
+/*.sublime-workspace
+/*.sublime-project
+
+# Local environment configuration files
+/.env
+/.env.local
+/.env.*.local
+/backend/config/development.yaml
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Miscellaneous
 /shelf/
-/backend/.idea/workspace.xml
-# Editor-based HTTP Client requests
 /httpRequests/
-# Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
 /backend/config/local.yaml
-.idea

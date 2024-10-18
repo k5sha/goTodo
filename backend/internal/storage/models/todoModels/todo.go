@@ -56,21 +56,21 @@ func (s *TodoStorage) GetOneTodo(id string) (Todo, error) {
 	return todo, nil
 }
 
-func (s *TodoStorage) SaveTodo(title string) (int64, error) {
+func (s *TodoStorage) SaveTodo(title string) (Todo, error) {
 	const op = "storage.models.Todo.Save"
 
-	stmt, err := s.DB.Prepare(`INSERT INTO todos (title, completed) VALUES ($1, FALSE) RETURNING id;`)
+	stmt, err := s.DB.Prepare(`INSERT INTO todos (title, completed) VALUES ($1, FALSE) RETURNING id, title, completed, created_at, updated_at;`)
 	if err != nil {
-		return 0, fmt.Errorf("%s: %w", op, err)
+		return Todo{}, fmt.Errorf("%s: %w", op, err)
 	}
 
-	var id int64
-	err = stmt.QueryRow(title).Scan(&id)
+	var todo Todo
+	err = stmt.QueryRow(title).Scan(&todo.Id, &todo.Title, &todo.Completed, &todo.CreatedAt, &todo.UpdatedAt)
 	if err != nil {
-		return 0, fmt.Errorf("%s: %w", op, err)
+		return Todo{}, fmt.Errorf("%s: %w", op, err)
 	}
 
-	return id, nil
+	return todo, nil
 }
 
 func (s *TodoStorage) RemoveTodo(id string) error {

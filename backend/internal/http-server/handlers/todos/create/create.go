@@ -4,6 +4,7 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/render"
 	"github.com/k5sha/golang-todo-example/internal/lib/logger/sl"
+	"github.com/k5sha/golang-todo-example/internal/storage/models/todoModels"
 	"log/slog"
 	"net/http"
 )
@@ -13,14 +14,13 @@ type Request struct {
 }
 
 type Response struct {
-	Status string `json:"status"`
-	Error  string `json:"error,omitempty"`
-	Id     int64  `json:"id,omitempty"`
-	Title  string `json:"title,omitempty"`
+	Status string           `json:"status"`
+	Error  string           `json:"error,omitempty"`
+	Todo   *todoModels.Todo `json:"todo,omitempty"`
 }
 
 type TodoSaver interface {
-	SaveTodo(title string) (int64, error)
+	SaveTodo(title string) (todoModels.Todo, error)
 }
 
 func New(log *slog.Logger, todoSaver TodoSaver) http.HandlerFunc {
@@ -52,7 +52,7 @@ func New(log *slog.Logger, todoSaver TodoSaver) http.HandlerFunc {
 
 		title := req.Title
 
-		id, err := todoSaver.SaveTodo(title)
+		todo, err := todoSaver.SaveTodo(title)
 		if err != nil {
 			log.Error("failed to save todo", sl.Err(err))
 			ResponseError(w, r, "failed to save todo")
@@ -60,16 +60,15 @@ func New(log *slog.Logger, todoSaver TodoSaver) http.HandlerFunc {
 
 		}
 
-		ResponseOK(w, r, id, title)
+		ResponseOK(w, r, todo)
 	}
 }
 
-func ResponseOK(w http.ResponseWriter, r *http.Request, id int64, title string) {
+func ResponseOK(w http.ResponseWriter, r *http.Request, todo todoModels.Todo) {
 	render.Status(r, http.StatusOK)
 	render.JSON(w, r, Response{
 		Status: "OK",
-		Id:     id,
-		Title:  title,
+		Todo:   &todo,
 	})
 }
 

@@ -1,0 +1,20 @@
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* Занять всю высоту экрана */
+}
+
+.spinner {
+    border: 8px solid rgba(255, 255, 255, 0.3); /* Внешний цвет */
+    border-top: 8px solid #646cff; /* Цвет верхней части */
+    border-radius: 50%;
+    width: 50px; /* Ширина спиннера */
+    height: 50px; /* Высота спиннера */
+    animation: spin 1s linear infinite; /* Анимация вращения */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

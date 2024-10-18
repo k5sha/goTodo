@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: todo_backend
     environment:
-      - CONFIG_PATH=./config/local.yaml
+      - CONFIG_PATH=./config/development.yaml
       - DATABASE_URL=postgres://user:password@db:5432/todo?sslmode=disable
     ports:
       - "8080:8080"

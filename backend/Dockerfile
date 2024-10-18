@@ -1,7 +1,7 @@
 FROM golang:1.23-bookworm
 
 
-WORKDIR /app
+WORKDIR /todo-backend
 
 
 COPY go.mod go.sum ./
@@ -17,5 +17,4 @@ ENV CONFIG_PATH=./config/development.yaml
 
 EXPOSE 8080
 
-# Запускаем приложение
 CMD ["/go-todo"]

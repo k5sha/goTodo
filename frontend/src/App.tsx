@@ -22,7 +22,7 @@ export default function App() {
             setLoading(true);
             try {
                 const data = await fetchTodos();
-                setTodos(data.todos);
+                setTodos(Array.isArray(data.todos) ? data.todos : []);
             } catch (error) {
                 console.error("Error fetching todos:", error);
             } finally {

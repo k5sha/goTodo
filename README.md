@@ -12,11 +12,11 @@
 
 ---
 
-## Описание
+## Description
 
-**TodosApp** — это приложение для управления задачами, использующее бэкенд на Go с фреймворком Chi и PostgreSQL для хранения данных. Фронтенд построен с использованием React и Vite. 
+**TodosApp** is a task management application with a backend built using Go with the Chi framework and PostgreSQL for data storage. The frontend is developed using React and Vite.
 
-## Стек технологий
+## Technology Stack
 
 - **Backend:** Go, Chi, PostgreSQL
 - **Frontend:** React, Vite
@@ -24,61 +24,61 @@
 
 ---
 
-## Установка и запуск
+## Installation and Running
 
-### Предварительные требования
+### Prerequisites
 
 - [Docker](https://www.docker.com/get-started)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
-### Шаги
+### Steps
 
-1. Клонируйте репозиторий:
+1. Clone the repository:
 
    ```bash
    git clone https://github.com/k5sha/golang-todo-example.git
    cd golang-todo-example
    ```
 
-2. Создайте файл `development.yaml` в корне проекта со следующим содержимым:
+2. Create a `development.yaml` file in the project root with the following contents:
 
    ```yaml
-   env: "local"
+   env: “local”
    http_server:
-    address: "0.0.0.0:8080"
+    address: “0.0.0.0.0:8080”
     timeout: 4s
     idle_timeout: 30s
    ```
 
-3. Запустите проект:
+3. Run the project:
 
    ```bash
    docker-compose up --build
    ```
 
-4. Откройте браузер и перейдите по адресу [http://localhost:8080](http://localhost:8080).
+4. open a browser and go to [http://localhost:8080](http://localhost:8080).
 
 ---
 
-## Использование API
+## API Usage
 
-**Эндпоинты:**
+**Endpoints:**
 
-- `GET /todo` — Получить все задачи
-- `GET /todo/{id}` — Получить задачу по ID
-- `POST /todo` — Создать новую задачу
-- `DELETE /todo/{id}/delete` — Удалить задачу по ID
-- `PATCH /todo/{id}/status` — Обновить статус задачи
-
----
-
-
-## Вклад
-
-Если вы хотите внести свой вклад, создайте Pull Request или откройте Issue с предложениями.
+- ``GET /todo`` - Get all tasks
+- `GET /todo/{id}` - Get task by ID
+- `POST /todo` - Create a new task
+- `DELETE /todo/{id}/delete` - Delete task by ID
+- `PATCH /todo/{id}/status` - Update Task Status
 
 ---
 
-## Лицензия
 
-Этот проект лицензирован под MIT License. См. [LICENSE](LICENSE) для подробностей.
+## Contribute
+
+If you want to contribute, create a Pull Request or open a Suggestion Issue.
+
+---
+
+## License
+
+This project is licensed under the MIT License. See. [LICENSE](LICENSE) for details.
